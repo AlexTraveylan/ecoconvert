@@ -1,0 +1,14 @@
+[package]
+name = "ecoconvert"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.3", features = ["derive"] }
+image = "0.24"
+webp = "0.2"
+ravif = { version = "0.11", default-features = false }
+
+[dependencies.rav1e]
+version = "0.6"
+default-features = false
