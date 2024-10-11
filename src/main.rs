@@ -10,17 +10,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let img = image::open(&cli.input)?;
 
-    if let Some(avif_path) = cli.avif_output.as_ref() {
-        println!("Conversion en AVIF avec une qualité de {}...", cli.quality);
-        conversion::to_avif(&img, avif_path, cli.quality)?;
-        println!("Image AVIF sauvegardée.");
-    }
+    let converter = conversion::get_converter(cli.output.extension()
+        .and_then(|ext| ext.to_str())
+        .ok_or("Extension de fichier non valide")?)?;
 
-    if let Some(webp_path) = cli.webp_output.as_ref() {
-        println!("Conversion en WebP avec une qualité de {}...", cli.quality);
-        conversion::to_webp(&img, webp_path, cli.quality)?;
-        println!("Image WebP sauvegardée.");
-    }
+    println!("Conversion en cours avec une qualité de {}...", cli.quality);
+    converter.convert(&img, &cli.output, cli.quality)?;
+    println!("Image convertie et sauvegardée.");
 
     println!("Conversion terminée !");
     Ok(())
