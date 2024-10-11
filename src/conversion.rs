@@ -39,6 +39,6 @@ pub fn get_converter(extension: &str) -> Result<Box<dyn ImageConverter>, Box<dyn
     match extension.to_lowercase().as_str() {
         "avif" => Ok(Box::new(AvifConverter)),
         "webp" => Ok(Box::new(WebPConverter)),
-        _ => Err("Format de fichier non pris en charge".into()),
+        _ => Err("Unsupported file format".into()),
     }
 }

@@ -12,12 +12,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let converter = conversion::get_converter(cli.output.extension()
         .and_then(|ext| ext.to_str())
-        .ok_or("Extension de fichier non valide")?)?;
+        .ok_or("Invalid file extension")?)?;
 
-    println!("Conversion en cours avec une qualité de {}...", cli.quality);
+    println!("Converting with quality {}...", cli.quality);
     converter.convert(&img, &cli.output, cli.quality)?;
-    println!("Image convertie et sauvegardée.");
+    println!("Image converted and saved.");
 
-    println!("Conversion terminée !");
+    println!("Conversion completed!");
     Ok(())
 }
