@@ -15,4 +15,16 @@ pub struct Cli {
     /// Compression quality (0-100, default 50)
     #[arg(short, long, default_value = "50")]
     pub quality: f32,
+
+    /// Resize percentage (e.g., 50%)
+    #[arg(long)]
+    pub resize: Option<String>,
+
+    /// Target width for resizing
+    #[arg(short = 'w', long)]
+    pub width: Option<u32>,
+
+    /// Target height for resizing
+    #[arg(short = 'h', long)]
+    pub height: Option<u32>,
 }
