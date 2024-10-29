@@ -17,14 +17,14 @@ pub struct Cli {
     pub quality: f32,
 
     /// Resize percentage (e.g., 50%)
-    #[arg(long)]
+    #[arg(short, long)]
     pub resize: Option<String>,
 
     /// Target width for resizing
-    #[arg(short = 'w', long)]
+    #[arg(short, long)]
     pub width: Option<u32>,
 
     /// Target height for resizing
-    #[arg(short = 'h', long)]
+    #[arg(short, long)]
     pub height: Option<u32>,
 }

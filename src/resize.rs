@@ -10,9 +10,14 @@ pub enum ResizeOption {
 pub fn resize_image(img: &DynamicImage, resize_option: ResizeOption) -> DynamicImage {
     match resize_option {
         ResizeOption::Percentage(percent) => {
-            let new_width = (img.width() as f32 * percent / 100.0) as u32;
-            let new_height = (img.height() as f32 * percent / 100.0) as u32;
-            img.resize(new_width, new_height, FilterType::Lanczos3)
+            let new_width = ((img.width() as f32 * percent) / 100.0) as u32;
+            let new_height = ((img.height() as f32 * percent) / 100.0) as u32;
+            let filter = if percent > 75.0 {
+                FilterType::Lanczos3
+            } else {
+                FilterType::Nearest
+            };
+            img.resize(new_width, new_height, filter)
         },
         ResizeOption::Dimensions(width, height) => {
             let (new_width, new_height) = calculate_dimensions(img.width(), img.height(), width, height);

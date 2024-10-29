@@ -12,7 +12,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut img = image::open(&cli.input)?;
 
-    // Appliquer le redimensionnement si nécessaire
     if let Some(resize_option) = get_resize_option(&cli)? {
         img = resize_image(&img, resize_option);
     }
@@ -21,11 +20,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .and_then(|ext| ext.to_str())
         .ok_or("Invalid file extension")?)?;
 
-    println!("Converting with quality {}...", cli.quality);
     converter.convert(&img, &cli.output, cli.quality)?;
-    println!("Image converted and saved.");
-
-    println!("Conversion completed!");
     Ok(())
 }
 
