@@ -3,12 +3,25 @@ name = "ecoconvert"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+default = ["parallel"]
+parallel = ["rayon"]
+
 [dependencies]
 clap = { version = "4.3", features = ["derive"] }
-image = "0.24"
-webp = "0.2"
+image = { version = "0.24", default-features = false, features = ["jpeg", "png", "webp"] }
+webp = { version = "0.2", default-features = false }
 ravif = { version = "0.11", default-features = false }
+rayon = { version = "1.7", optional = true }
+num_cpus = "1.15"
 
 [dependencies.rav1e]
 version = "0.6"
 default-features = false
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+opt-level = 3
