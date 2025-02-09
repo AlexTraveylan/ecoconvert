@@ -1,7 +1,9 @@
 [package]
 name = "ecoconvert"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
+license = "MIT"
+authors = ["Timothée Demares <timothee.demares@gmail.com>"]
 
 [features]
 default = ["parallel"]
